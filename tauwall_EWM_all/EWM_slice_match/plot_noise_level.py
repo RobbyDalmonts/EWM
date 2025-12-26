@@ -174,23 +174,26 @@ e200_std = np.std(e200_l)
 standard_data = [dns_l,e10_l,e15_l,e20_l,e30_l,e40_l,e50_l,e60_l,e70_l,e80_l,e90_l,e100_l,e110_l,e120_l,e130_l,e140_l,e150_l,e160_l,e170_l,e180_l,e190_l,e200_l]
 
 standard_data = [dns_l, e10_l, e30_l, e60_l, e100_l, e160_l]
-y_list = ['dns',10,30,60,100,160]
-
+y_list = ['dns',10,60,120,200]
 
 max_point = 500000
-fig,ax = plt.subplots(figsize=(8,8))
+fig,ax = plt.subplots(figsize=(10,10))
 for (i,label) in zip(standard_data,y_list):
     if i.shape[0] > max_point:
         data_sample = np.random.choice(i.ravel(),max_point,replace=False)
     else:
         data_sample = i.ravel()
 
-    sns.kdeplot(data_sample,linewidth=1.5,label=str(label),ax=ax)
+    if label == 'dns':
+        sns.kdeplot(data_sample,linewidth=2.5,color='black',linestyle='--',label=str(label),ax=ax)
+    else:
+        sns.kdeplot(data_sample,linewidth=2.5,label=str(label),ax=ax)
+    
 ax.legend()
 #ax.set_xlim(-5,6)
 ax.set_xlim(0,0.007)
 ax.set_title('pdf dist')
-plt.savefig('pdf_less_nonnorm.png',dpi=300)
+plt.savefig('pdf_less_less_nonnorm.png',dpi=300)
 plt.close()
 exit()
 mean_standard = []
